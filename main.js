@@ -162,8 +162,8 @@
       depthWrite: false
     });
     const letterMesh = new THREE.Mesh(planeGeo, planeMat);
-    letterMesh.position.set(xPos * 0.8, 7.8, palaceZ + 0.4);
-    letterMesh.userData = { baseY: 7.8, index: idx };
+    letterMesh.position.set(xPos * 0.8, 14.2, palaceZ + 0.4);
+    letterMesh.userData = { baseY: 14.2, index: idx };
     return letterMesh;
   }
 
