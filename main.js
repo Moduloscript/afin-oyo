@@ -25,7 +25,12 @@
 
   /* ------------------------------------------------------------ 1 · Three.js Setup */
   const canvas = document.getElementById('gl');
-  if (!canvas || typeof THREE === 'undefined') return;
+  if (!canvas || typeof THREE === 'undefined') {
+    const pre = document.getElementById('pre');
+    if (pre) pre.classList.add('done');
+    document.body.classList.remove('is-locked');
+    return;
+  }
 
   const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
@@ -1182,54 +1187,12 @@
   const preFill = document.getElementById('pre-fill');
   const prePct = document.getElementById('pre-pct');
 
-  const JOBS = [
-    ['Reading the royal type', () => (document.fonts ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 300))]) : null)],
-    ['Pouring laterite earth', () => { measure(); }],
-    ['Raising the Ọ̀pó pillars', () => {}],
-    ['Carving the palace sanctuary', () => {}],
-    ['Lighting the sacred àtùpà flame', () => {}]
-  ];
-
-  function boot() {
-    document.body.classList.add('is-locked');
-    wireReveals();
-    wireForegroundStages();
-    wireNav();
-    wireHeroExit();
-    wireCursor();
-    wireChips();
-    wireCopyEmail();
-    resize();
-
-    let i = 0;
-    const step = () => {
-      const j = JOBS[i];
-      const done = () => {
-        i++;
-        const p = i / JOBS.length;
-        if (preFill) preFill.style.right = `${((1 - p) * 100).toFixed(1)}%`;
-        if (prePct) prePct.textContent = Math.round(p * 100);
-
-        if (i < JOBS.length) {
-          setTimeout(step, 24);
-        } else {
-          setTimeout(startExperience, 200);
-        }
-      };
-
-      let r;
-      try {
-        r = j[1]();
-      } catch (err) {
-        console.error(err);
-      }
-      r && r.then ? r.then(done, done) : done();
-    };
-
-    setTimeout(step, 60);
-  }
+  let experienceStarted = false;
 
   function startExperience() {
+    if (experienceStarted) return;
+    experienceStarted = true;
+
     if (preEl) preEl.classList.add('done');
     document.body.classList.remove('is-locked');
 
@@ -1242,6 +1205,45 @@
     });
 
     requestAnimationFrame(animate);
+  }
+
+  function boot() {
+    try {
+      document.body.classList.add('is-locked');
+      wireReveals();
+      wireForegroundStages();
+      wireNav();
+      wireHeroExit();
+      wireCursor();
+      wireChips();
+      wireCopyEmail();
+      resize();
+    } catch (e) {
+      console.warn('Boot initialization notice:', e);
+    }
+
+    let progress = 0;
+    const progressTimer = setInterval(() => {
+      progress += Math.floor(Math.random() * 15) + 10;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(progressTimer);
+        if (preFill) preFill.style.right = '0%';
+        if (prePct) prePct.textContent = '100';
+        setTimeout(startExperience, 160);
+      } else {
+        if (preFill) preFill.style.right = `${(100 - progress).toFixed(1)}%`;
+        if (prePct) prePct.textContent = String(progress);
+      }
+    }, 35);
+
+    // Hard fallback safety timer (maximum 1.2s timeout)
+    setTimeout(() => {
+      clearInterval(progressTimer);
+      if (preFill) preFill.style.right = '0%';
+      if (prePct) prePct.textContent = '100';
+      startExperience();
+    }, 1200);
   }
 
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
