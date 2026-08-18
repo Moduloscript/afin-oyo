@@ -1183,7 +1183,7 @@
   const prePct = document.getElementById('pre-pct');
 
   const JOBS = [
-    ['Reading the royal type', () => document.fonts && document.fonts.ready],
+    ['Reading the royal type', () => (document.fonts ? Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 300))]) : null)],
     ['Pouring laterite earth', () => { measure(); }],
     ['Raising the Ọ̀pó pillars', () => {}],
     ['Carving the palace sanctuary', () => {}],
