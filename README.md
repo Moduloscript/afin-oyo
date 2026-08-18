@@ -2,6 +2,8 @@
 
 > An interactive 3D WebGL sanctuary and creative technologist portfolio inspired by ancient **Ọ̀yọ́ palace architecture**, carved **Ìrókò Ọ̀pó pillars**, and the kinetic spirit of West African craft.
 
+![Àfin Ọ̀yọ́ Preview](assets/preview.png)
+
 ---
 
 ## 🏛️ Concept & Architectural Vision
@@ -84,6 +86,7 @@ afin-oyo/
 ├── assets/
 │   ├── artifacts/       # Foreground cultural artifacts & figures
 │   ├── plates/          # High-resolution project plates & previews
+│   ├── preview.png      # Hero preview screenshot & banner
 │   └── three.min.js     # Three.js WebGL engine bundle
 ├── index.html           # Main HTML5 document & chapter structure
 ├── main.js              # Three.js world scene, camera conductor & animations
