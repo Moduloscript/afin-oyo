@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>WERNER — Creative Technologist & Spatial Architect (Àfin Ọ̀yọ́)</title>
+  <meta name="description" content="An interactive 3D nocturnal sanctuary and portfolio inspired by ancient Ọ̀yọ́ palace architecture, carved Ọ̀pó pillars, and the kinetic spirit of Egúngún masquerades.">
+  
+  <!-- Typography: Onest + Cinzel for Yoruba accents -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Onest:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-active-chapter="0">
+
+  <!-- ============================================================ PRELOADER -->
+  <div id="pre">
+    <div class="pre-in">
+      <div class="pre-mark">
+        <svg viewBox="0 0 44 44" fill="none" aria-hidden="true">
+          <circle cx="22" cy="22" r="18" stroke="#e6ded0" stroke-width="1.2" stroke-opacity="0.3"/>
+          <path d="M14 30L17 16L22 24L27 16L30 30H14Z" fill="#d4a359" fill-opacity="0.85" stroke="#e6ded0" stroke-width="1"/>
+          <circle cx="22" cy="12" r="3.5" fill="#e0231c"/>
+        </svg>
+      </div>
+      <div class="pre-jp yoruba-tx">ÀFIN Ọ̀YỌ́</div>
+      <div class="pre-bar"><i id="pre-fill"></i></div>
+      <div class="pre-meta">
+        <span>Raising the nocturnal sanctuary</span><b><span id="pre-pct">0</span>%</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ LAYER 0: THREE.JS 3D WEBGL WORLD -->
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div id="vignette" aria-hidden="true"></div>
+  <div id="grain" aria-hidden="true"></div>
+  <div class="cur-dot" id="cursor" aria-hidden="true"></div>
+
+  <!-- ============================================================ LAYER 50: STICKY NAVIGATION -->
+  <header class="nav" id="nav">
+    <a class="brand" href="#hero" data-cursor>
+      <svg class="brand-crest" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" stroke="#e6ded0" stroke-width="1" stroke-opacity="0.3"/>
+        <path d="M12 28L15 14L20 22L25 14L28 28H12Z" fill="#d4a359" fill-opacity="0.85" stroke="#e6ded0" stroke-width="0.8"/>
+        <circle cx="20" cy="11" r="3.5" fill="#e0231c"/>
+        <circle cx="20" cy="20" r="1.5" fill="#e6ded0"/>
+      </svg>
+      <div class="brand-tx">
+        <b>WERNER</b>
+        <i>ÀFIN Ọ̀YỌ́ / ATELIER NOIR</i>
+      </div>
+    </a>
+
+    <div class="nav-meta">
+      <span class="status-indicator"><i class="status-dot"></i> AVAILABLE FOR Q3/Q4</span>
+      <span class="nav-time" id="live-time">00:00:00 WAT</span>
+    </div>
+
+    <nav class="nav-links" id="navlinks">
+      <a class="nav-link" href="#hero" data-cursor><span>00 / Àbáwọlé</span><span class="alt">Threshold</span></a>
+      <a class="nav-link" href="#works" data-cursor><span>01 / Ilé Ìmọ̀</span><span class="alt">Manifesto</span></a>
+      <a class="nav-link" href="#gallery" data-cursor><span>02 / Àkòdì</span><span class="alt">Gallery</span></a>
+      <a class="nav-link" href="#lab" data-cursor><span>03 / Ẹwà</span><span class="alt">Laboratory</span></a>
+      <a class="nav-link" href="#craft" data-cursor><span>04 / Òpómúléró</span><span class="alt">Ethos</span></a>
+      <a class="nav-link" href="#dispatch" data-cursor><span>05 / Àṣẹ</span><span class="alt">Dispatch</span></a>
+    </nav>
+  </header>
+
+  <!-- ============================================================ PROGRESS RAIL -->
+  <aside class="rail" id="rail" aria-label="Chapter navigation">
+    <button class="rail-btn is-on" data-target="hero" data-cam-idx="0" aria-label="Chapter 00 — Àbáwọlé"><i></i><span>00</span></button>
+    <button class="rail-btn" data-target="works" data-cam-idx="1" aria-label="Chapter 01 — Ilé Ìmọ̀"><i></i><span>01</span></button>
+    <button class="rail-btn" data-target="gallery" data-cam-idx="2" aria-label="Chapter 02 — Àkòdì"><i></i><span>02</span></button>
+    <button class="rail-btn" data-target="lab" data-cam-idx="3" aria-label="Chapter 03 — Ẹwà"><i></i><span>03</span></button>
+    <button class="rail-btn" data-target="craft" data-cam-idx="4" aria-label="Chapter 04 — Òpómúléró"><i></i><span>04</span></button>
+    <button class="rail-btn" data-target="dispatch" data-cam-idx="5" aria-label="Chapter 05 — Àṣẹ"><i></i><span>05</span></button>
+  </aside>
+
+  <!-- ============================================================ LAYER 10: DOCUMENT CONTENT -->
+  <main class="page" id="top">
+
+    <!-- — CHAPTER 00: ÀBÁWỌLÉ (THE ROYAL THRESHOLD) -->
+    <section class="sec hero" id="hero" data-cam="0" data-chapter-index="0">
+      <div class="hero-top">
+        <div class="eyebrow" data-rv="fade">
+          <span class="dot"></span> CHAPTER 00 — ÀBÁWỌLÉ · THE ROYAL THRESHOLD
+        </div>
+        <h1 class="display h-hero">
+          <span class="mask-line"><span>Where ancestral form</span></span>
+          <span class="mask-line"><span>reveals the</span></span>
+          <span class="mask-line"><span>unseen.</span></span>
+        </h1>
+        <p class="hero-sub body" data-rv="up">
+          Enter the sacred realm through its quiet thresholds, where ritual, craft and spatial memory shape the path.
+        </p>
+      </div>
+
+      <div class="hero-spacer"></div>
+
+      <div class="hero-foot">
+        <div class="hero-cue" data-rv="fade">
+          <span>SCROLL TO ENTER</span>
+          <span class="track"><i></i></span>
+        </div>
+
+        <div class="chapters" id="chips">
+          <div class="chip" data-chip="1" data-rv="up" data-cursor><span class="num">01</span>
+            <span class="tx"><b>Ilé Ìmọ̀</b><p>Manifesto</p></span></div>
+          <div class="chip" data-chip="2" data-rv="up" data-cursor><span class="num">02</span>
+            <span class="tx"><b>Àkòdì</b><p>Gallery</p></span></div>
+          <div class="chip" data-chip="3" data-rv="up" data-cursor><span class="num">03</span>
+            <span class="tx"><b>Ẹwà</b><p>The Lab</p></span></div>
+          <div class="chip" data-chip="4" data-rv="up" data-cursor><span class="num">04</span>
+            <span class="tx"><b>Òpómúléró</b><p>Craft & Ethos</p></span></div>
+        </div>
+      </div>
+
+      <!-- Preview Portal Floating Window -->
+      <a class="peek" href="#gallery" data-view="3" data-rv="fade" data-cursor aria-label="Preview: Àfin Ìmọ̀ Spatial Suite">
+        <span class="peek-fr">
+          <img src="assets/plates/project-01.jpg" alt="Preview Plate">
+          <i class="glow" style="--gx:65%; --gy:35%; --gr:24%; --gt:6.4s; --gt2:9.8s; --gc1:rgba(212,163,89,0.6); --gc2:rgba(143,40,27,0.25)"></i>
+        </span>
+        <span class="peek-play">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M9 6l9 6-9 6V6z" fill="#e6ded0"/></svg>
+        </span>
+        <span class="peek-cap">
+          <b class="yoruba-tx">Àfin Ìmọ̀</b>
+          <i>Echo v4 — Spatial Suite</i>
+        </span>
+      </a>
+
+      <div class="hero-side" data-rv="up">
+        <span class="v yoruba-tx">òpó múlé ró</span>
+      </div>
+    </section>
+
+    <!-- — CHAPTER 01: ILÉ ÌMỌ̀ (THE ROYAL ARCHIVE & ARCHITECTURAL MANIFESTO) -->
+    <section class="sec" id="works" data-cam="1" data-chapter-index="1">
+      <!-- Foreground stage for Chapter 01: Ground Compound Wall -->
+      <div class="fg" data-fg="works" aria-hidden="true">
+        <span class="fg-el fg-wall" data-fg-in="left">
+          <img src="assets/plates/fg-oyo-wall.png" alt="" width="1536" height="884" loading="lazy" decoding="async">
+        </span>
+      </div>
+
+      <div class="sec-head" data-rv="fade">
+        <span class="k"><b>01</b> — Ilé Ìmọ̀ · The Royal Archive</span>
+        <span class="rule"></span>
+        <span class="k yoruba-tx">ìpìlẹ̀ àgbà</span>
+      </div>
+
+      <div class="gate-grid">
+        <h2 class="display h-sec" data-rv="up">
+          <span class="mask-line"><span>Three architectural pillars</span></span>
+          <span class="mask-line"><span>built for enduring scale.</span></span>
+        </h2>
+        <div class="gate-copy">
+          <p class="lead" data-rv="up">
+            Like the ancient bronze casters and master carvers of the Ọ̀yọ́ kingdom, we believe enduring software 
+            requires structural integrity, cognitive economy, and sensory majesty.
+          </p>
+          <p class="body" data-rv="up">
+            Every interface is forged as a sacred space: fast, light, mathematically composed, 
+            and resilient across generations of devices and viewports.
+          </p>
+          <a class="arrowlink" href="#gallery" data-rv="fade" data-cursor>
+            <span>Explore the Gallery of Artifacts</span>
+            <svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#d4a359" stroke-width="1.3"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="gate-stats" data-rv="up">
+        <div><b>08+</b><span>Years in Craft</span></div>
+        <div><b>60fps</b><span>Target Frame Rate</span></div>
+        <div><b>100%</b><span>Type Safety</span></div>
+        <div><b>0.8s</b><span>Avg. First Paint</span></div>
+      </div>
+    </section>
+
+    <!-- — CHAPTER 02: ÀKÒDÌ (THE GALLERY OF ARTIFACTS / 3 MASTER MONOLITHS) -->
+    <section class="sec" id="gallery" data-cam="2" data-chapter-index="2">
+      <div class="sec-head" data-rv="fade">
+        <span class="k"><b>02</b> — Àkòdì · Selected Works Gallery</span>
+        <span class="rule"></span>
+        <span class="k yoruba-tx">iṣẹ́ àgbà</span>
+      </div>
+
+      <div class="gallery-head">
+        <h2 class="display h-sec" data-rv="up">
+          <span class="mask-line"><span>Tactile digital monoliths</span></span>
+          <span class="mask-line"><span>and spatial architectures.</span></span>
+        </h2>
+        <p class="body-lg" data-rv="up">
+          A curated exhibition of flagship applications, interactive 3D WebGL experiences, and design systems.
+        </p>
+      </div>
+
+      <!-- The Asymmetrical Showcase Stage (1 Master Plate + 2 Stacked Cards) -->
+      <div class="showcase-stage" id="showcase">
+        
+        <!-- Left: Dominant Master Landscape Plate (16:10) -->
+        <article class="plate-hero" data-rv="up" data-cursor>
+          <div class="plate-window">
+            <img src="assets/plates/plate-01-palace.jpg" alt="Àfin Ọ̀yọ́ Nocturnal Sanctuary" loading="lazy">
+            <i class="glow" style="--gx:74%; --gy:32%; --gr:26%; --gt:7.2s; --gt2:10.5s; --gc1:rgba(212,163,89,0.55); --gc2:rgba(224,35,28,0.22)"></i>
+            <div class="plate-overlay">
+              <span class="plate-badge yoruba-tx">01 // ÀFIN Ọ̀YỌ́</span>
+              <h3 class="plate-title">WHERE ENDURING FORM MEETS SPATIAL MEMORY</h3>
+              <p class="plate-sub">High-precision WebGL architectures and interactive systems honoring ancient Yoruba royal geometry.</p>
+            </div>
+            <span class="plate-action">
+              <svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#ffffff" stroke-width="1.3"/></svg>
+            </span>
+          </div>
+        </article>
+
+        <!-- Right: 2 Stacked Secondary Plates -->
+        <div class="plate-stack">
+          
+          <!-- Stack Plate 01: Atupa Lantern -->
+          <article class="plate-card" data-rv="up" data-cursor>
+            <div class="plate-window">
+              <img src="assets/plates/plate-02-lantern.jpg" alt="Àtùpà Lantern Court" loading="lazy">
+              <i class="glow glow--flame" style="--gx:68%; --gy:46%; --gr:18%; --gt:3.8s; --gt2:5.4s; --gc1:rgba(255,180,90,0.65); --gc2:rgba(224,70,30,0.30)"></i>
+              <div class="plate-info">
+                <span class="plate-num">02 / 03</span>
+                <b class="plate-tag yoruba-tx">ÀTÙPÀ</b>
+                <span class="plate-label">Lantern Sanctuary</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Stack Plate 02: Courtyard Pathway -->
+          <article class="plate-card" data-rv="up" data-cursor>
+            <div class="plate-window">
+              <img src="assets/plates/plate-03-pathway.jpg" alt="Laterite Shrine Walk" loading="lazy">
+              <i class="glow" style="--gx:52%; --gy:24%; --gr:22%; --gt:6.8s; --gt2:11.0s; --gc1:rgba(212,163,89,0.5); --gc2:rgba(180,40,20,0.22)"></i>
+              <div class="plate-info">
+                <span class="plate-num">03 / 03</span>
+                <b class="plate-tag yoruba-tx">ÒPÓ MÚLÉ RÓ</b>
+                <span class="plate-label">Laterite Shrine Walk</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- — CHAPTER 03: ÀKÒDÌ ẸWÀ (THE LABORATORY & MASQUERADE FLOW) -->
+    <section class="sec" id="lab" data-cam="3" data-chapter-index="3">
+      <!-- Foreground stage for Chapter 03: Swaying Iroko Branch & Atupa Lantern Framing the Lab -->
+      <div class="fg" data-fg="lab" aria-hidden="true">
+        <span class="fg-el fg-branch fg-el--sway" data-fg-in="right">
+          <img src="assets/plates/fg-branch-atupa.png" alt="" width="1024" height="1438" loading="lazy" decoding="async">
+        </span>
+      </div>
+
+      <div class="sec-head" data-rv="fade">
+        <span class="k"><b>03</b> — Àkòdì Ẹwà · The Kinetic Laboratory</span>
+        <span class="rule"></span>
+        <span class="k yoruba-tx">ẹwà àbíkẹ́</span>
+      </div>
+
+      <div class="cur-head">
+        <h2 class="display h-sec" data-rv="up">
+          <span class="mask-line"><span>Kinetic studies, GLSL shaders</span></span>
+          <span class="mask-line"><span>& procedural mechanics.</span></span>
+        </h2>
+        <p class="body-lg" data-rv="up">
+          Inspired by the swirling Aṣọ-Òkè panels and cowrie lattice of the Egúngún masquerade in motion, 
+          the laboratory is where we stress-test WebGL physics solvers and reactive motion algorithms.
+        </p>
+      </div>
+
+      <div class="cur" id="cur">
+        <div class="les" data-cursor data-rv="up">
+          <span class="k">01</span>
+          <h3>Egúngún Kinetic Ribbon Physics<em class="yoruba-tx">aṣọ ẹ̀mí</em></h3>
+          <p>Multi-frequency Simplex noise ribbons simulating the flowing, swirling drapery of sacred masquerades.</p>
+          <span class="t">WebGL / Shaders</span>
+          <i class="bar"></i>
+        </div>
+
+        <div class="les" data-cursor data-rv="up">
+          <span class="k">02</span>
+          <h3>Deterministic Scroll Conductor<em class="yoruba-tx">àsìkò ìṣe</em></h3>
+          <p>Frame-rate independent damping (`damp`) binding native document scroll to 3D camera splines.</p>
+          <span class="t">Architecture</span>
+          <i class="bar"></i>
+        </div>
+
+        <div class="les" data-cursor data-rv="up">
+          <span class="k">03</span>
+          <h3>Àtùpà Volumetric Fire Scattering<em class="yoruba-tx">iná àtùpà</em></h3>
+          <p>Dynamic point light flicker physics illuminating burnished laterite earth and carved Iroko columns.</p>
+          <span class="t">GLSL Shaders</span>
+          <i class="bar"></i>
+        </div>
+
+        <div class="les" data-cursor data-rv="up">
+          <span class="k">04</span>
+          <h3>Cowrie Particle Dynamics (Ẹyọ Owó)<em class="yoruba-tx">ẹyọ owó</em></h3>
+          <p>Floating 3D particulate field reacting dynamically to mouse gravity and scroll velocity.</p>
+          <span class="t">Physics Engine</span>
+          <i class="bar"></i>
+        </div>
+
+        <div class="les" data-cursor data-rv="up">
+          <span class="k">05</span>
+          <h3>Zero-Bloat DOM Orchestration<em class="yoruba-tx">ìmọ̀ jíjinlẹ̀</em></h3>
+          <p>Achieving 60fps cinematic fluidity without heavy animation dependencies or memory overhead.</p>
+          <span class="t">Performance</span>
+          <i class="bar"></i>
+        </div>
+      </div>
+    </section>
+
+    <!-- — CHAPTER 04: ÒPÓMÚLÉRÓ (ENGINEERING ETHOS & SACRED PILLARS) -->
+    <section class="sec" id="craft" data-cam="4" data-chapter-index="4">
+      <!-- Foreground stage for Chapter 04: Carved Yoruba Opomulero Staff of Strength -->
+      <div class="fg" data-fg="craft" aria-hidden="true">
+        <span class="fg-el fg-staff fg-el--sway" data-fg-in="left">
+          <i class="fg-glow fg-glow--amber"></i>
+          <img src="assets/plates/fg-yoruba-staff.png" alt="Carved Yoruba Opomulero Staff" width="896" height="1200" loading="lazy" decoding="async">
+          <i class="fg-base-shadow"></i>
+        </span>
+      </div>
+
+      <div class="sec-head" data-rv="fade">
+        <span class="k"><b>04</b> — Òpómúléró · The Pillar of Strength</span>
+        <span class="rule"></span>
+        <span class="k yoruba-tx">ìpìlẹ̀ líle</span>
+      </div>
+
+      <div class="craft-grid">
+        <div class="craft-manifesto" data-rv="up">
+          <h2 class="display h-sec" data-rv="up">
+            <span class="mask-line"><span>Òpó tó múlé ró:</span></span>
+            <span class="mask-line"><span>The pillar that holds the sanctuary.</span></span>
+          </h2>
+          <p class="lead" data-rv="up">
+            In ancient Yoruba monumental architecture, the Ọ̀pó is not merely a post—it is an ancestral testament to balance, equilibrium, and structural mastery.
+          </p>
+          <p class="body" data-rv="up">
+            We engineer digital monoliths with the same uncompromising ethos: zero bloat, mathematically rigorous foundations, deterministic state management, and resilient longevity across generations of hardware.
+          </p>
+          
+          <div class="craft-pillars" data-rv="up">
+            <div class="pillar">
+              <b>01 / Ìwà (Integrity)</b>
+              <p>Clean code architecture, strict type safety, zero hidden debt, and deterministic state flows.</p>
+            </div>
+            <div class="pillar">
+              <b>02 / Ẹwà (Sublime Form)</b>
+              <p>Disciplined visual hierarchy, bespoke kinetic typography, and tactile material honesty.</p>
+            </div>
+            <div class="pillar">
+              <b>03 / Ìfaradà (Resilience)</b>
+              <p>Sub-second initial paint, 60fps WebGL spline execution, and cross-device performance.</p>
+            </div>
+            <div class="pillar">
+              <b>04 / Àṣẹ (Kinetic Power)</b>
+              <p>Dynamic GLSL procedural shaders, Simplex noise ribbons, and hardware-accelerated physics.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="craft-stack" data-rv="up">
+          <div class="stack-box">
+            <div class="stack-box-head">
+              <h4>Core Engineering Architecture</h4>
+              <span class="stack-badge yoruba-tx">ìmọ̀ ẹ̀rọ</span>
+            </div>
+            <p class="stack-desc">Type-safe full-stack platforms, continuous WebGL pipelines, and high-concurrency real-time protocols.</p>
+            <ul class="tag-list">
+              <li>TypeScript</li>
+              <li>WebGL / Three.js</li>
+              <li>GLSL Shaders</li>
+              <li>React / Next.js</li>
+              <li>Go / Node.js</li>
+              <li>Web Audio API</li>
+              <li>Redis / PostgreSQL</li>
+              <li>Tailwind / CSS</li>
+            </ul>
+          </div>
+
+          <div class="stack-box">
+            <div class="stack-box-head">
+              <h4>Spatial & 3D Toolchain</h4>
+              <span class="stack-badge yoruba-tx">àwòrán 3D</span>
+            </div>
+            <p class="stack-desc">Parametric modeling, PBR material synthesis, and precision vector tokenization systems.</p>
+            <ul class="tag-list">
+              <li>Blender (glTF / PBR)</li>
+              <li>Figma Tokens</li>
+              <li>Material Maker</li>
+              <li>Photoshop / Squoosh</li>
+              <li>Spline 3D</li>
+              <li>Cinema 4D</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="craft-stats" data-rv="up">
+        <div><b>0.0ms</b><span>Layout Shifts</span></div>
+        <div><b>60fps</b><span>Spline Physics</span></div>
+        <div><b>100%</b><span>Native Execution</span></div>
+        <div><b>0</b><span>Runtime Bloat</span></div>
+      </div>
+    </section>
+
+    <!-- — CHAPTER 05: ÀṢẸ (THE DISPATCH & MANIFESTATION) -->
+    <section class="sec fin" id="dispatch" data-cam="5" data-chapter-index="5">
+      <!-- Foreground stage for Chapter 05: Sacred Egúngún Ancestral Masquerade in Motion -->
+      <div class="fg" data-fg="dispatch" aria-hidden="true">
+        <span class="fg-el fg-egungun fg-el--sway" data-fg-in="right">
+          <i class="fg-glow fg-glow--vermilion"></i>
+          <img src="assets/plates/fg-yoruba-egungun.png" alt="Egúngún Ancestral Masquerade" width="896" height="1200" loading="lazy" decoding="async">
+          <i class="fg-base-shadow"></i>
+        </span>
+      </div>
+
+      <div class="sec-head" data-rv="fade">
+        <span class="k"><b>05</b> — Àṣẹ · Manifestation & Royal Dispatch</span>
+        <span class="rule"></span>
+        <span class="k yoruba-tx">àṣẹ ìran</span>
+      </div>
+
+      <div class="fin-content">
+        <h2 class="display fin-title" data-rv="up">
+          <span class="mask-line"><span>Àṣẹ: Let us create what</span></span>
+          <span class="mask-line"><span>has not been seen yet.</span></span>
+        </h2>
+        <p class="lead fin-lead" data-rv="up">
+          Currently partnering with forward-thinking founders, creative agencies, and engineering teams 
+          on flagship digital platforms, 3D spatial web apps, and bespoke design systems.
+        </p>
+
+        <!-- 3 Commission Tracks Monolith Panels -->
+        <div class="commission-tracks" data-rv="up">
+          <div class="track-card">
+            <span class="track-num">01</span>
+            <div class="track-body">
+              <b>Spatial Architectures & 3D Worlds</b>
+              <p>Bespoke interactive WebGL experiences, continuous camera splines, and procedural shader simulations.</p>
+              <div class="track-tags">
+                <span>Three.js</span><span>GLSL Shaders</span><span>Spatial Audio</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="track-card">
+            <span class="track-num">02</span>
+            <div class="track-body">
+              <b>Flagship Digital Platforms</b>
+              <p>Mission-critical web applications, high-frequency user interfaces, and robust full-stack architecture.</p>
+              <div class="track-tags">
+                <span>Next.js</span><span>TypeScript</span><span>Go / Rust</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="track-card">
+            <span class="track-num">03</span>
+            <div class="track-body">
+              <b>Atelier Design Systems</b>
+              <p>Mathematical layout tokens, kinetic interaction models, and multi-platform design infrastructure.</p>
+              <div class="track-tags">
+                <span>Design Tokens</span><span>Figma</span><span>UI Frameworks</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-wrap" data-rv="fade">
+          <a class="cta" href="mailto:werner@afin-oyo.dev" id="email-cta" data-cursor>
+            <i></i>
+            <span>Initialize Conversation</span>
+            <svg viewBox="0 0 14 14" fill="none"><path d="M3 11 11 3M5 3h6v6" stroke="#e6ded0" stroke-width="1.3"/></svg>
+          </a>
+          <button class="copy-pill" id="copy-btn" data-cursor aria-label="Copy email address">
+            <span>Copy email</span>
+          </button>
+        </div>
+
+        <div class="dispatch-meta" data-rv="up">
+          <span><i class="status-dot"></i> Available for commissions (Q3/Q4 2026)</span>
+          <span>Timezone: WAT / UTC+1 · Lagos & Global Remote</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ FOOTER / COLOPHON -->
+    <footer class="foot" data-cam="6">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <svg viewBox="0 0 40 40" fill="none" width="44" height="44" aria-hidden="true">
+            <circle cx="20" cy="20" r="18" stroke="#e6ded0" stroke-width="1" stroke-opacity="0.3"/>
+            <path d="M12 28L15 14L20 22L25 14L28 28H12Z" fill="#d4a359" fill-opacity="0.85" stroke="#e6ded0" stroke-width="0.8"/>
+            <circle cx="20" cy="11" r="3.5" fill="#e0231c"/>
+          </svg>
+          <p>
+            An interactive 6-chapter nocturnal sanctuary inspired by the architecture of the ancient Ọ̀yọ́ Empire, 
+            rendered live in Three.js with continuous camera splines and physical WebGL lighting.
+          </p>
+        </div>
+
+        <div>
+          <h4>Chapters</h4>
+          <ul>
+            <li><a href="#hero" data-cursor>00 / Àbáwọlé (The Threshold)</a></li>
+            <li><a href="#works" data-cursor>01 / Ilé Ìmọ̀ (Manifesto)</a></li>
+            <li><a href="#gallery" data-cursor>02 / Àkòdì (Gallery)</a></li>
+            <li><a href="#lab" data-cursor>03 / Ẹwà (The Laboratory)</a></li>
+            <li><a href="#craft" data-cursor>04 / Òpómúléró (Ethos)</a></li>
+            <li><a href="#dispatch" data-cursor>05 / Àṣẹ (The Dispatch)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Specializations</h4>
+          <ul>
+            <li><a href="#gallery" data-cursor>Spatial Interface Architecture</a></li>
+            <li><a href="#gallery" data-cursor>High-Frequency Terminals</a></li>
+            <li><a href="#lab" data-cursor>Kinetic Shaders & Creative Coding</a></li>
+            <li><a href="#craft" data-cursor>Design System Engineering</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Network</h4>
+          <ul>
+            <li><a href="https://github.com" target="_blank" rel="noopener" data-cursor>GitHub ↗</a></li>
+            <li><a href="https://x.com" target="_blank" rel="noopener" data-cursor>Twitter / X ↗</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener" data-cursor>LinkedIn ↗</a></li>
+            <li><a href="https://readcv.com" target="_blank" rel="noopener" data-cursor>Read.cv ↗</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="foot-base">
+        <span>© 2026 WERNER — ÀFIN Ọ̀YỌ́ / ALL RIGHTS RESERVED</span>
+        <span class="yoruba-tx">àṣẹ ìran · ọ̀pó tó múlé ró</span>
+        <span>THREE.JS · WEBGL · NATIVE SCROLL ENGINE · 60 FPS</span>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- The near plane of the active chapter is parked here outside .page -->
+  <div id="fg-sky" aria-hidden="true"></div>
+
+  <!-- Three.js Engine & Conductor Script -->
+  <script src="assets/three.min.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
