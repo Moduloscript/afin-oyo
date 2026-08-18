@@ -138,14 +138,14 @@
   hillMesh.position.set(0, -1.3, 8.2);
   scene.add(hillMesh);
 
-  // 3D Monumental Wordmark ("Ọ̀ Y Ọ́" — Perfectly Centered Symmetrical Centerpiece)
+  // 3D Monumental Wordmark ("Ọ̀ Y Ọ́" — Palace Beam Inscription)
   const wordmarkGroup = new THREE.Group();
   function create3DLetter(char, xPos, idx) {
     const cvs = document.createElement('canvas');
     cvs.width = 1024;
     cvs.height = 1024;
     const ctx = cvs.getContext('2d');
-    ctx.fillStyle = '#edf4ee';
+    ctx.fillStyle = '#f4eae0';
     ctx.font = '900 680px "Onest", "Cinzel", sans-serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
@@ -154,7 +154,7 @@
     const tex = new THREE.CanvasTexture(cvs);
     tex.minFilter = THREE.LinearFilter;
     tex.magFilter = THREE.LinearFilter;
-    const planeGeo = new THREE.PlaneGeometry(6.4, 6.4);
+    const planeGeo = new THREE.PlaneGeometry(3.4, 3.4);
     const planeMat = new THREE.MeshBasicMaterial({
       map: tex,
       transparent: true,
@@ -162,15 +162,15 @@
       depthWrite: false
     });
     const letterMesh = new THREE.Mesh(planeGeo, planeMat);
-    letterMesh.position.set(xPos, 2.2, 3.6);
-    letterMesh.userData = { baseY: 2.2, index: idx };
+    letterMesh.position.set(xPos * 0.8, 7.8, palaceZ + 0.4);
+    letterMesh.userData = { baseY: 7.8, index: idx };
     return letterMesh;
   }
 
-  // 3 Symmetric Letters: Ọ̀ (-4.6), Y (0.0 DEAD CENTER), Ọ́ (+4.6)
-  wordmarkGroup.add(create3DLetter('Ọ̀', -4.6, 0));
+  // 3 Symmetric Letters: Ọ̀ (-3.6), Y (0.0 DEAD CENTER), Ọ́ (+3.6)
+  wordmarkGroup.add(create3DLetter('Ọ̀', -3.6, 0));
   wordmarkGroup.add(create3DLetter('Y', 0.0, 1));
-  wordmarkGroup.add(create3DLetter('Ọ́', 4.6, 2));
+  wordmarkGroup.add(create3DLetter('Ọ́', 3.6, 2));
   scene.add(wordmarkGroup);
 
   // Sanctuary Architecture (Àfin Ọ̀yọ́)
@@ -1068,16 +1068,18 @@
       }
     }
 
-    // 3D Monumental Wordmark: Centerpiece entrance rise & scroll dissolve
+    // 3D Monumental Wordmark: Ambient background watermark rise & scroll dissolve
     if (wordmarkGroup) {
       const near = smooth(0.02, 0.85, RIG.smooth);
       const introProgress = introStart ? sat((now - introStart) / 1600) : 0;
+      const isMobile = window.innerWidth < 768;
+      const baseAlpha = isMobile ? 0.32 : 0.48;
       wordmarkGroup.children.forEach(mesh => {
         const idx = mesh.userData.index || 0;
         const st = clamp((introProgress - idx * 0.1) / 0.65, 0, 1);
         const e = easeOut(st);
         mesh.position.y = mesh.userData.baseY - (1 - e) * 2.8;
-        mesh.material.opacity = e * 0.70 * (1 - near);
+        mesh.material.opacity = e * baseAlpha * (1 - near);
         mesh.visible = mesh.material.opacity > 0.005;
       });
     }
@@ -1160,7 +1162,16 @@
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
     renderer.setSize(w, h, true);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const maxDpr = w < 768 ? 1.75 : 2;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, maxDpr));
+
+    // Calibrate 3D wordmark scale for mobile viewports
+    if (wordmarkGroup) {
+      const isMobile = w < 768;
+      const s = isMobile ? 0.62 : 1.0;
+      wordmarkGroup.scale.set(s, s, s);
+    }
+
     measure();
   }
 

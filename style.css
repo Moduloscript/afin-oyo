@@ -1889,9 +1889,16 @@ h1, h2, h3, h4 {
 /* ==========================================================================
    RESPONSIVE & ACCESSIBILITY
    ========================================================================== */
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE EXCELLENCE
+   ========================================================================== */
 @media (max-width: 1080px) {
+  :root {
+    --pad: 24px;
+  }
   .hero-top { max-width: none; }
-  .gate-grid { grid-template-columns: 1fr; gap: 26px; margin-left: 0; }
+  .gate-grid { grid-template-columns: 1fr; gap: 24px; margin-left: 0; }
+  .gate-stats { margin-left: 0; }
   .gallery-head { grid-template-columns: 1fr; gap: 20px; }
   .showcase-stage { grid-template-columns: 1fr; }
   .plate-hero .plate-window { min-height: 340px; }
@@ -1900,36 +1907,257 @@ h1, h2, h3, h4 {
   .les { grid-template-columns: 44px minmax(0, 1.1fr) minmax(0, 1.2fr) 90px; }
   .craft-grid { grid-template-columns: 1fr; margin-left: 0; }
   .craft-pillars { grid-template-columns: repeat(2, 1fr); }
+  .craft-stats { margin-left: 0; }
   .fin { max-width: none; }
+  .fin-content { max-width: none; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
   
   .fg.fg-active, .fg.fg-retiring {
-    height: min(52svh, 500px);
-    opacity: 0.85;
+    height: min(50svh, 480px);
   }
 }
 
 @media (max-width: 820px) {
-  .nav-links { display: none; }
+  :root {
+    --pad: 20px;
+  }
+  
+  /* Top Nav optimization */
+  .nav {
+    padding: 0 16px;
+    justify-content: space-between;
+  }
+  .nav-links { display: none !important; }
+  .nav-meta {
+    margin-left: auto;
+    gap: 8px;
+  }
+  .nav-time {
+    display: none !important;
+  }
+  .status-indicator {
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
   .rail { display: none; }
   .hero-side { display: none; }
   .peek { display: none; }
   .hero-cue { display: none; }
-  .chapters { grid-template-columns: repeat(2, 1fr); gap: 18px 14px; }
-  .gate-stats { grid-template-columns: repeat(2, 1fr); }
-  .craft-pillars { grid-template-columns: 1fr; }
-  .les { grid-template-columns: 36px minmax(0, 1fr) 70px; }
-  .les p { display: none; }
-  .foot-grid { grid-template-columns: 1fr; }
   
-  .fg.fg-active, .fg.fg-retiring {
-    height: min(44svh, 380px);
-    opacity: 0.65;
+  /* Hero on mobile */
+  .hero {
+    min-height: 92svh;
+    padding-top: 84px;
   }
-  [data-fg="works"] .fg-wall { width: clamp(240px, 55vw, 380px); }
-  [data-fg="lab"] .fg-branch { width: clamp(160px, 35vw, 260px); right: 0; }
-  [data-fg="craft"] .fg-staff { left: 0; width: clamp(140px, 28vw, 220px); }
-  [data-fg="dispatch"] .fg-egungun { right: 0; width: clamp(160px, 30vw, 240px); }
+  .hero-title {
+    font-size: clamp(32px, 8.8vw, 54px);
+    line-height: 1.02;
+    max-width: 12ch;
+  }
+  .hero-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-top: clamp(24px, 4vh, 44px);
+  }
+  .chapters {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 18px;
+    width: 100%;
+  }
+  
+  /* Section Header on mobile */
+  .sec-head {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .sec-head .rule {
+    display: none;
+  }
+  
+  /* Chapter 01 (Works) */
+  .gate-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-left: 0;
+    padding-top: 0;
+  }
+  .gate-grid h2 {
+    font-size: clamp(28px, 7.2vw, 42px);
+    max-width: none;
+  }
+  .gate-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 16px;
+    margin-top: 32px;
+    margin-left: 0;
+    padding: 18px 20px;
+  }
+  
+  /* Chapter 02 (Gallery) */
+  .gallery-head h2 {
+    font-size: clamp(28px, 7.2vw, 42px);
+  }
+  .showcase-stage {
+    gap: 20px;
+  }
+  .plate-window {
+    min-height: 380px;
+  }
+  
+  /* Chapter 03 (Kinetic Lab) */
+  .cur-head {
+    max-width: none;
+    margin-bottom: 28px;
+  }
+  .cur-head h2 {
+    font-size: clamp(28px, 7.2vw, 42px);
+    max-width: none;
+  }
+  .cur {
+    max-width: none;
+  }
+  .les {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 16px 0;
+  }
+  .les .k {
+    font-size: 10.5px;
+  }
+  .les h3 {
+    font-size: 16px;
+    line-height: 1.35;
+  }
+  .les h3 em {
+    display: inline-block;
+    margin-left: 8px;
+  }
+  .les p {
+    display: block;
+    font-size: 12px;
+    color: #8c9791;
+    line-height: 1.5;
+  }
+  .les .t {
+    align-self: flex-start;
+    font-size: 9.5px;
+    background: rgba(212, 163, 89, 0.1);
+    border: 1px solid rgba(212, 163, 89, 0.25);
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-top: 4px;
+  }
+  
+  /* Chapter 04 (Craft) */
+  .craft-grid {
+    grid-template-columns: 1fr;
+    margin-left: 0;
+    gap: 28px;
+  }
+  .craft-manifesto h2 {
+    font-size: clamp(28px, 7.2vw, 42px);
+  }
+  .craft-pillars {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 20px;
+  }
+  .craft-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 16px;
+    margin-top: 32px;
+    margin-left: 0;
+    padding: 18px 20px;
+  }
+  
+  /* Chapter 05 (Dispatch) */
+  .fin {
+    min-height: auto;
+    padding: 72px var(--pad) 96px;
+  }
+  .fin-content {
+    max-width: 100%;
+  }
+  .fin-title {
+    font-size: clamp(30px, 8vw, 48px);
+    max-width: none;
+  }
+  .fin-lead {
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+  .commission-tracks {
+    gap: 10px;
+    margin-bottom: 24px;
+    padding-top: 16px;
+  }
+  .track-card {
+    grid-template-columns: 28px 1fr;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+  .cta-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .cta, .copy-pill {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    padding: 16px 20px;
+  }
+  .dispatch-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Footer on mobile */
+  .foot-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  
+  /* Mobile Foreground Cutout soft backplate mode (Non-intrusive ambient framing) */
+  .fg.fg-active, .fg.fg-retiring {
+    height: min(38svh, 320px);
+    opacity: 0.30 !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+  }
+  [data-fg="works"] .fg-wall { width: clamp(200px, 48vw, 300px); left: -10px; }
+  [data-fg="lab"] .fg-branch { width: clamp(140px, 32vw, 220px); right: -10px; }
+  [data-fg="craft"] .fg-staff { width: clamp(120px, 24vw, 180px); left: -10px; }
+  [data-fg="dispatch"] .fg-egungun { width: clamp(140px, 28vw, 200px); right: -10px; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --pad: 16px;
+  }
+  .chapters {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .chip {
+    padding: 10px 12px;
+  }
+  .plate-window {
+    min-height: 320px;
+  }
+  .cur-dot {
+    display: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
